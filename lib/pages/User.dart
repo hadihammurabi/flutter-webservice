@@ -1,8 +1,7 @@
-import 'dart:async';
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:webservice/bloc/UserBloc.dart';
+import 'package:webservice/services/UserService.dart' as userService;
 
 class User extends StatefulWidget {
   User({Key key, this.title}) : super(key: key);
@@ -14,32 +13,20 @@ class User extends StatefulWidget {
 }
 
 class _UserState extends State<User> {
-  List<dynamic> users;
-
-  Future getUsers() async {
-    final response =
-        await http.get('https://jsonplaceholder.typicode.com/users');
-    final users = json.decode(response.body);
-    return users;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    getUsers().then((u) {
-      print(u.length);
-      setState(() {
-        users = u;
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+
+    final UserBloc userBloc = Provider.of<UserBloc>(context);
+
+    userService.getUsers().then((u) {
+      setState(() {
+        userBloc.users = u;
+      });
+    });
+
     var body;
-    if (users == null) {
-      body = Text('Data kosong');
+    if (userBloc.users == null) {
+      body = Center(child: Text('Data kosong'));
     } else {
       body = Column(
         children: <Widget>[
@@ -47,7 +34,7 @@ class _UserState extends State<User> {
             child: SizedBox(
               height: 10.0,
               child: ListView.builder(
-                itemCount: users.length,
+                itemCount: userBloc.users.length,
                 itemBuilder: (BuildContext ctx, int index) {
                   return Card(
                     child: Container(
@@ -56,19 +43,19 @@ class _UserState extends State<User> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              users[index]['username'],
+                              userBloc.users[index]['username'],
                               style: TextStyle(fontSize: 15.0),
                             ),
                             Text(
-                              users[index]['name'],
+                              userBloc.users[index]['name'],
                               style: TextStyle(fontSize: 25.0),
                             ),
                             Text(
-                              users[index]['email'],
+                              userBloc.users[index]['email'],
                               style: TextStyle(fontSize: 15.0),
                             ),
                             Text(
-                              users[index]['phone'],
+                              userBloc.users[index]['phone'],
                               style: TextStyle(fontSize: 15.0),
                             ),
                           ],

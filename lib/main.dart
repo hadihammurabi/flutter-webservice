@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:webservice/bloc/UserBloc.dart';
 import 'package:webservice/pages/User.dart';
 
 void main() => runApp(MyApp());
@@ -12,8 +14,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: User(title: 'User List'),
+      home: ChangeNotifierProvider<UserBloc>.value(
+          notifier: UserBloc(), child: User(title: 'User List')),
     );
   }
 }
-
