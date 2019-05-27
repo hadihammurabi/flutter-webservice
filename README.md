@@ -1,6 +1,6 @@
 # webservice
 
-A new Flutter project.
+A Flutter example, request JSON data using web service.
 
 ## Getting Started
 
