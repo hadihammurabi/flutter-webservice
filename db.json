@@ -15,5 +15,19 @@
       "name": "Isa Bell",
       "phone": "0898736763736"
     }
+  ],
+  "foods": [
+    {
+      "id": 1,
+      "name": "Bakso"
+    },
+    {
+      "id": 2,
+      "name": "Mi Ayam"
+    },
+    {
+      "id": 3,
+      "name": "Nasi Kucing"
+    }
   ]
 }
