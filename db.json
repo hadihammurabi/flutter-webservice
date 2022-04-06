@@ -29,5 +29,25 @@
       "id": 3,
       "name": "Nasi Kucing"
     }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Pasta Gigi",
+      "price": 10000,
+      "stock": true
+    },
+    {
+      "id": 2,
+      "name": "Detergen",
+      "price": 15000,
+      "stock": false
+    },
+    {
+      "id": 3,
+      "name": "Sabun Cair",
+      "price": 8000,
+      "stock": true
+    },
   ]
 }
